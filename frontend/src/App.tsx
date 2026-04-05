@@ -47,12 +47,13 @@ export default function App() {
     <Suspense fallback={<LoadingScreen label="Loading page..." />}>
       <Routes>
         <Route element={<LandingPage />} path="/" />
-        <Route element={<LoginPage />} path="/login" />
+        <Route element={<LoginPage />} path="/student/login" />
+        <Route element={<Navigate replace to="/student/login" />} path="/login" />
         <Route element={<LoginPage />} path="/admin/login" />
         <Route element={<LoginPage />} path="/staff/login" />
         <Route element={<Navigate replace to="/staff/login" />} path="/staff-login" />
         <Route element={<Navigate replace to="/admin/login" />} path="/admin-login" />
-        <Route element={<Navigate replace to="/login" />} path="/student-login" />
+        <Route element={<Navigate replace to="/student/login" />} path="/student-login" />
 
         <Route element={<ProtectedRoute allowedRoles={['student']} />}>
           <Route element={<AppShell />}>
