@@ -1,4 +1,4 @@
-import { ArrowRight, GraduationCap, School, ShieldCheck } from 'lucide-react'
+import { ArrowRight, GraduationCap, School } from 'lucide-react'
 import { Link, Navigate } from 'react-router-dom'
 
 import { useAuth } from '@/contexts/auth-context'
