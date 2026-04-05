@@ -18,7 +18,7 @@ export function ProtectedRoute({ allowedRoles }: ProtectedRouteProps) {
   }
 
   if (!profile) {
-    let redirectPath = '/student/login'
+    let redirectPath = '/student-login'
     if (location.pathname.startsWith('/staff')) {
       redirectPath = '/staff-login'
     } else if (location.pathname.startsWith('/admin') || location.pathname.startsWith('/super-admin')) {

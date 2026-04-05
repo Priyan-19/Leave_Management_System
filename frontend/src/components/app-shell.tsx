@@ -121,7 +121,7 @@ export function AppShell() {
     if (currentRole === 'admin') {
       navigate('/admin/login')
     } else {
-      navigate(`/${currentRole}/login`)
+      navigate(`/${currentRole}-login`)
     }
   }
 
