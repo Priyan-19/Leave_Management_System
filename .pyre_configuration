@@ -1,0 +1,14 @@
+{
+  "source_directories": [
+    "backend"
+  ],
+  "site_package_search_strategy": "all",
+  "search_path": [
+    "backend",
+    "C:/Users/Priyan/AppData/Local/Python/pythoncore-3.14-64/Lib/site-packages"
+  ],
+  "exclude": [
+    ".*\\\\pytest_cache\\\\.*",
+    ".*\\\\frontend\\\\.*"
+  ]
+}

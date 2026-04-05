@@ -1,0 +1,76 @@
+Metadata-Version: 2.4
+Name: leave-management-api
+Version: 1.0.0
+Summary: FastAPI backend for a Firebase-powered leave management SaaS.
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: email-validator>=2.2.0
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: firebase-admin>=6.6.0
+Requires-Dist: openpyxl>=3.1.0
+Requires-Dist: pandas>=2.2.0
+Requires-Dist: pydantic-settings>=2.6.0
+Requires-Dist: python-multipart>=0.0.9
+Requires-Dist: reportlab>=4.2.0
+Requires-Dist: slowapi>=0.1.9
+Requires-Dist: uvicorn[standard]>=0.30.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3.0; extra == "dev"
+Requires-Dist: httpx>=0.27.0; extra == "dev"
+
+# Leave Portal - Backend API
+
+> [!NOTE]
+> For a full system setup and running instructions, see the [Manual Run Guide](../MANUAL_RUN_GUIDE.md) in the project root.
+
+FastAPI backend for the Firebase-powered Leave Management System. Designed with strict multi-tenant boundaries and role-based access control (RBAC).
+
+## Features
+
+- **FastAPI**: Asynchronous routing, robust validation with Pydantic.
+- **Firebase Admin SDK**: Authentication (token verification, custom claims) and Firestore interactions.
+- **Role-Based Access Control**:
+  - `super_admin`: Full system oversight, staff management.
+  - `staff`: Scoped access to their assigned students and corresponding leave requests.
+  - `student`: Standard access scope for balance checking and leave applications.
+- **Exports/Reporting**: Support for PDF (reportlab) and Excel (openpyxl) generation.
+- **Bulk Import**: Read and ingest large CSV/XLSX student rosters.
+
+## Setup Requirements
+
+- Python 3.11+
+- Virtual Environment (recommended)
+- Firebase Project (service account `.json` key required)
+
+## Installation & Running Locally
+
+1. **Install dependencies**:
+   ```bash
+   pip install -e .[dev]
+   ```
+
+2. **Environment Variables**:
+   Copy `.env.example` to `.env` and configure your Firebase credentials path:
+   ```env
+   FIREBASE_SERVICE_ACCOUNT_PATH=/path/to/your/firebase-adminsdk.json
+   ```
+
+3. **Run Server**:
+   ```bash
+   uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+   ```
+   API Docs available at: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+## Scripts
+
+- **`bootstrap_admin.py`**: Initializes system users (Super Admins, Staff) directly in Firebase and Firestore.
+  ```bash
+  python scripts/bootstrap_admin.py --email admin@campus.edu --password ChangeMe123! --name "Admin" --role super_admin
+  ```
+
+## Testing
+
+Run the local Pytest suite to ensure business logic and router endpoints function properly:
+```bash
+python -m pytest
+```

@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --brand: #facc15; /* yellow-400 */
+  --brand-dark: #eab308; /* yellow-500 */
+  --brand-foreground: #0f172a; /* slate-900 */
+  --accent: #f59e0b;
+  --ink: #0f172a;
+  --muted: #64748b;
+}
+
+.theme-admin {
+  --brand: #0369a1; /* sky-700 */
+  --brand-dark: #075985; /* sky-800 */
+  --brand-foreground: #ffffff;
+}
+
+.theme-staff {
+  --brand: #d97706; /* amber-600 */
+  --brand-dark: #b45309; /* amber-700 */
+  --brand-foreground: #ffffff;
+}
+
+.theme-student {
+  --brand: #facc15; /* yellow-400 (proper lemon yellow) */
+  --brand-dark: #eab308; /* yellow-500 */
+  --brand-foreground: #0f172a; /* slate-900 */
+}
+
+@theme inline {
+  --font-sans: 'Manrope', 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Manrope', sans-serif;
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-accent: var(--accent);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top left, rgba(20, 184, 166, 0.1), transparent 28%),
+      radial-gradient(circle at bottom right, rgba(20, 184, 166, 0.05), transparent 22%),
+      linear-gradient(180deg, #f1fbfb 0%, #f8fafc 48%, #f0f7ff 100%);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply rounded-[28px] border border-white/70 bg-white/75 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur;
+  }
+
+  .data-panel {
+    @apply overflow-hidden rounded-[28px] border border-white/70 bg-white/75 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur;
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-semibold text-slate-700;
+  }
+
+  .input-base {
+    @apply w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/10;
+  }
+
+  .primary-button {
+    @apply inline-flex items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-brand-foreground shadow-lg shadow-brand/20 transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .secondary-button {
+    @apply inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-brand hover:text-brand;
+  }
+
+  .table-shell {
+    @apply overflow-x-auto;
+  }
+}

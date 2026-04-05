@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "leave-management-api"
+version = "1.0.0"
+description = "FastAPI backend for a Firebase-powered leave management SaaS."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "email-validator>=2.2.0",
+  "fastapi>=0.115.0",
+  "firebase-admin>=6.6.0",
+  "openpyxl>=3.1.0",
+  "pandas>=2.2.0",
+  "pydantic-settings>=2.6.0",
+  "python-multipart>=0.0.9",
+  "reportlab>=4.2.0",
+  "slowapi>=0.1.9",
+  "uvicorn[standard]>=0.30.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.0",
+  "httpx>=0.27.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+  "ignore:'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction\\(\\) instead:DeprecationWarning:slowapi.extension",
+  "ignore:'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction\\(\\) instead:DeprecationWarning:fastapi.routing",
+]
