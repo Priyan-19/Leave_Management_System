@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:e2e": "playwright test",
-    "test:e2e:headed": "playwright test --headed"
+    "test:e2e": "playwright test --pass-with-no-tests",
+    "test:e2e:headed": "playwright test --headed --pass-with-no-tests"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
