@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import { api } from '@/api/sdk'
 import type { LeaveStatus } from '@/api/types'
+import { DataTable } from '@/components/data-table'
 import { EmptyState } from '@/components/empty-state'
 import { PanelLoader } from '@/components/panel-loader'
 import { SectionHeading } from '@/components/section-heading'
@@ -87,35 +88,68 @@ export function LeaveHistoryPage() {
       {!isLoading && !isError ? (
         <article className="data-panel">
           {data && data.length > 0 ? (
-            <div className="table-shell">
-              <table className="min-w-full text-left text-sm">
-                <thead className="bg-slate-50 text-slate-500">
-                  <tr>
-                    <th className="px-6 py-4 font-semibold">Leave</th>
-                    <th className="px-6 py-4 font-semibold">Dates</th>
-                    <th className="px-6 py-4 font-semibold">Reason</th>
-                    <th className="px-6 py-4 font-semibold">Status</th>
-                    <th className="px-6 py-4 font-semibold">Last updated</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.map((leave) => (
-                    <tr className="border-t border-slate-100" key={leave.id}>
-                      <td className="px-6 py-4">
-                        <p className="font-semibold text-slate-900">{toLabelCase(leave.leave_type)}</p>
-                        <p className="mt-1 text-xs text-slate-500">{leave.days} day(s)</p>
-                      </td>
-                      <td className="px-6 py-4 text-slate-600">{formatRange(leave.start_date, leave.end_date)}</td>
-                      <td className="max-w-xs px-6 py-4 text-slate-600">{leave.reason}</td>
-                      <td className="px-6 py-4">
-                        <StatusBadge status={leave.status} />
-                      </td>
-                      <td className="px-6 py-4 text-slate-600">{formatDateTime(leave.updated_at)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <DataTable
+              data={data}
+              columns={[
+                {
+                  header: 'Leave',
+                  cell: (leave) => (
+                    <div>
+                      <p className="font-semibold text-slate-900">{toLabelCase(leave.leave_type)}</p>
+                      <p className="mt-1 text-xs text-slate-500">{leave.days} day(s)</p>
+                    </div>
+                  ),
+                },
+                {
+                  header: 'Dates',
+                  cell: (leave) => (
+                    <span className="text-slate-600">{formatRange(leave.start_date, leave.end_date)}</span>
+                  ),
+                },
+                {
+                  header: 'Reason',
+                  cell: (leave) => (
+                    <span className="max-w-xs block truncate text-slate-600">{leave.reason}</span>
+                  ),
+                },
+                {
+                  header: 'Status',
+                  cell: (leave) => <StatusBadge status={leave.status} />,
+                },
+                {
+                  header: 'Last updated',
+                  cell: (leave) => (
+                    <span className="text-slate-600">{formatDateTime(leave.updated_at)}</span>
+                  ),
+                },
+              ]}
+              mobileCard={(leave) => (
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-widest text-brand">
+                        {toLabelCase(leave.leave_type)}
+                      </p>
+                      <p className="mt-1 text-lg font-semibold text-slate-900">{leave.days} Day(s)</p>
+                    </div>
+                    <StatusBadge status={leave.status} />
+                  </div>
+                  <div className="rounded-xl bg-slate-50 p-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Duration</p>
+                    <p className="mt-1 text-sm text-slate-700">{formatRange(leave.start_date, leave.end_date)}</p>
+                  </div>
+                  {leave.reason && (
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Reason</p>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-600">{leave.reason}</p>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between border-t border-slate-100 pt-3">
+                    <p className="text-[10px] text-slate-400">Updated {formatDateTime(leave.updated_at)}</p>
+                  </div>
+                </div>
+              )}
+            />
           ) : (
             <div className="p-6">
               <EmptyState

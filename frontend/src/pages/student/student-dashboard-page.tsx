@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { CalendarDays, Clock3, Wallet } from 'lucide-react'
 
 import { api } from '@/api/sdk'
+import { DataTable } from '@/components/data-table'
 import { EmptyState } from '@/components/empty-state'
 import { PanelLoader } from '@/components/panel-loader'
 import { SectionHeading } from '@/components/section-heading'
@@ -91,33 +92,59 @@ export function StudentDashboardPage() {
               />
             </div>
           ) : (
-            <div className="table-shell">
-              <table className="min-w-full text-left text-sm">
-                <thead className="bg-slate-50 text-slate-500">
-                  <tr>
-                    <th className="px-6 py-4 font-semibold">Type</th>
-                    <th className="px-6 py-4 font-semibold">Dates</th>
-                    <th className="px-6 py-4 font-semibold">Requested</th>
-                    <th className="px-6 py-4 font-semibold">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.recent_activity.map((leave) => (
-                    <tr className="border-t border-slate-100" key={leave.id}>
-                      <td className="px-6 py-4">
-                        <p className="font-semibold text-slate-900">{toLabelCase(leave.leave_type)}</p>
-                        <p className="mt-1 text-xs text-slate-500">{leave.days} day(s)</p>
-                      </td>
-                      <td className="px-6 py-4 text-slate-600">{formatRange(leave.start_date, leave.end_date)}</td>
-                      <td className="px-6 py-4 text-slate-600">{formatDateTime(leave.created_at)}</td>
-                      <td className="px-6 py-4">
-                        <StatusBadge status={leave.status} />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <DataTable
+              data={data.recent_activity}
+              columns={[
+                {
+                  header: 'Type',
+                  cell: (leave) => (
+                    <div>
+                      <p className="font-semibold text-slate-900">{toLabelCase(leave.leave_type)}</p>
+                      <p className="mt-1 text-xs text-slate-500">{leave.days} day(s)</p>
+                    </div>
+                  ),
+                },
+                {
+                  header: 'Dates',
+                  cell: (leave) => (
+                    <span className="text-slate-600">{formatRange(leave.start_date, leave.end_date)}</span>
+                  ),
+                },
+                {
+                  header: 'Requested',
+                  cell: (leave) => (
+                    <span className="text-slate-600">{formatDateTime(leave.created_at)}</span>
+                  ),
+                },
+                {
+                  header: 'Status',
+                  cell: (leave) => <StatusBadge status={leave.status} />,
+                },
+              ]}
+              mobileCard={(leave) => (
+                <div className="space-y-4 text-left">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-widest text-brand">
+                        {toLabelCase(leave.leave_type)}
+                      </p>
+                      <p className="mt-1 text-lg font-semibold text-slate-900">{leave.days} Day(s)</p>
+                    </div>
+                    <StatusBadge status={leave.status} />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="rounded-xl bg-slate-50 p-3">
+                      <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Dates</p>
+                      <p className="mt-1 text-xs text-slate-700">{formatRange(leave.start_date, leave.end_date)}</p>
+                    </div>
+                    <div className="rounded-xl bg-slate-50 p-3">
+                      <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Requested</p>
+                      <p className="mt-1 text-xs text-slate-700">{formatDateTime(leave.created_at)}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            />
           )}
         </article>
       </section>

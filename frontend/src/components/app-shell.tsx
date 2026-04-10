@@ -136,8 +136,8 @@ export function AppShell() {
       <div className="mx-auto flex max-w-7xl gap-6">
         <aside
           className={cn(
-            'glass-panel fixed inset-y-4 left-4 z-40 flex w-72 flex-col gap-6 px-5 py-6 transition duration-200 md:static md:translate-x-0',
-            mobileOpen ? 'translate-x-0' : '-translate-x-[120%]',
+            'glass-panel fixed inset-y-4 left-4 z-40 flex w-72 flex-col gap-6 px-5 py-6 transition-all duration-300 ease-in-out md:static md:translate-x-0',
+            mobileOpen ? 'translate-x-0 opacity-100' : '-translate-x-[120%] opacity-0 md:opacity-100',
           )}
         >
           <div className="flex items-start justify-between gap-3">
