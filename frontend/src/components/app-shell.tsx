@@ -74,7 +74,7 @@ function getHeaderTitle(role: UserRole) {
     return 'Everything your assigned students need from one desk'
   }
 
-  return 'Institution-wide control without losing staff-level ownership'
+  return 'Leave Portal'
 }
 
 function getRoleMeta(role: UserRole, department?: string | null, year?: string | null, institution?: string | null) {
@@ -176,6 +176,7 @@ export function AppShell() {
                 }
                 onClick={() => setMobileOpen(false)}
                 to={href}
+                end
               >
                 <Icon size={18} />
                 <span>{label}</span>
@@ -265,6 +266,7 @@ export function AppShell() {
               )
             }
             to={href}
+            end
           >
             <Icon size={18} />
             <span className="truncate">{label}</span>

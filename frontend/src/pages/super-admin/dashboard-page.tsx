@@ -19,13 +19,13 @@ export function SuperAdminDashboardPage() {
   })
 
   if (isLoading) {
-    return <PanelLoader label="Loading super admin analytics..." />
+    return <PanelLoader label="Loading admin analytics..." />
   }
 
   if (isError || !data) {
     return (
       <EmptyState
-        description="The super admin dashboard could not be loaded right now. Please try again shortly."
+        description="The admin dashboard could not be loaded right now. Please try again shortly."
         title="Dashboard unavailable"
       />
     )
@@ -35,7 +35,7 @@ export function SuperAdminDashboardPage() {
     <div className="space-y-6">
       <SectionHeading
         description="See institution-wide leave traffic, staff coverage, approval distribution, and the students driving the most requests across all tenants."
-        title="Super admin dashboard"
+        title="Admin dashboard"
       />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
