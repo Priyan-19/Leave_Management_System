@@ -190,31 +190,33 @@ export function AppShell() {
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col gap-6 pb-24 md:pb-0">
-          <header className="glass-panel relative flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-4">
+          <header className="glass-panel relative flex items-center justify-between gap-4 p-3 md:p-5">
+            <div className="flex min-w-0 items-center gap-3">
               <button
-                className="secondary-button px-3 py-3 md:hidden"
+                className="secondary-button shrink-0 px-2.5 py-2.5 md:hidden"
                 onClick={() => setMobileOpen(true)}
                 type="button"
               >
-                <Menu size={18} />
+                <Menu size={20} />
               </button>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Institution console</p>
-                <h1 className="mt-2 font-display text-2xl font-semibold text-slate-900">{getHeaderTitle(profile.role)}</h1>
+              <div className="min-w-0">
+                <p className="hidden text-[10px] font-semibold uppercase tracking-[0.3em] text-brand sm:block">Institution console</p>
+                <h1 className="truncate font-display text-lg font-bold text-slate-900 md:mt-2 md:text-2xl">
+                  {getHeaderTitle(profile.role)}
+                </h1>
               </div>
             </div>
 
-            <div className="relative">
+            <div className="relative shrink-0">
               <button
                 className={cn(
-                  'flex items-center gap-3 rounded-[24px] px-4 py-3 text-left shadow-sm transition',
+                  'flex items-center gap-3 rounded-2xl px-2 py-2 text-left shadow-sm transition md:rounded-[24px] md:px-4 md:py-3',
                   profileOpen ? 'bg-white ring-2 ring-brand/10' : 'bg-white/85 hover:bg-white',
                 )}
                 onClick={() => setProfileOpen(!profileOpen)}
                 type="button"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand text-sm font-bold text-brand-foreground shadow-lg shadow-brand/20">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-xs font-bold text-brand-foreground shadow-lg shadow-brand/20 md:h-11 md:w-11 md:rounded-2xl md:text-sm">
                   {initials}
                 </div>
                 <div className="hidden xl:block">
