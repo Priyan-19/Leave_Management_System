@@ -21,7 +21,8 @@ Requires-Dist: httpx>=0.27.0; extra == "dev"
 # Leave Portal - Backend API
 
 > [!NOTE]
-> For a full system setup and running instructions, see the [Manual Run Guide](../MANUAL_RUN_GUIDE.md) in the project root.
+> For a full system setup and running instructions, see the [Manual Run Guide](../run.md) in the project root.
+**Project Status: ✅ Backend API Fully Implemented**
 
 FastAPI backend for the Firebase-powered Leave Management System. Designed with strict multi-tenant boundaries and role-based access control (RBAC).
 

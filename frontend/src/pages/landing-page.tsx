@@ -8,7 +8,7 @@ const portalCards = [
   {
     title: 'Student Portal',
     description: 'Apply for leave, track your balance, and follow every request from submission to decision.',
-    href: '/login',
+    href: '/student/login',
     icon: GraduationCap,
     accent: 'text-brand',
     badge: 'bg-brand/10 text-brand',

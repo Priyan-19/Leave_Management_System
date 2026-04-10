@@ -118,11 +118,7 @@ export function AppShell() {
     setProfileOpen(false)
     await signOut()
     toast.success('You have been signed out.')
-    if (currentRole === 'admin') {
-      navigate('/admin/login')
-    } else {
-      navigate(`/${currentRole}-login`)
-    }
+    navigate(`/${currentRole}/login`)
   }
 
   return (
